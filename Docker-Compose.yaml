@@ -1,0 +1,18 @@
+version: '3'
+
+services: 
+  server1:
+    image: vidittamrakar/express_server
+    ports:
+      - "3000:8080"
+      
+  server2:
+    image: vidittamrakar/express_server
+    ports:
+      - "3001:8080"
+
+  server3:
+    image: vidittamrakar/express_server
+    ports:
+      - "3002:8080"
+
