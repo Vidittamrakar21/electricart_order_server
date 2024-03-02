@@ -1,9 +1,24 @@
 import express, {Express, Request,Response} from 'express'
 //@ts-ignore
 import apirouter from './routes/test'
+import mongoose from 'mongoose'
+import cors from "cors";
+import dotenv from 'dotenv'
+import morgan from "morgan"
+dotenv.config()
 const app: Express = express ()
 
 app.use(express.json())
+app.use(cors())
+app.use(morgan('tiny'))
+
+main().catch(err => console.log(err));
+
+async function main() {
+    await mongoose.connect(`mongodb+srv://vidit:${process.env.dbpass}@cluster0.90000pt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
+    console.log("Database Connected");
+  }
+
 
 app.use('/api', apirouter);
 
