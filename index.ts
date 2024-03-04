@@ -1,12 +1,17 @@
 import express, {Express, Request,Response} from 'express'
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from "@apollo/server/express4";
+import creategqlserver from './graphql';
 //@ts-ignore
 import apirouter from './routes/test'
 import mongoose from 'mongoose'
 import cors from "cors";
 import dotenv from 'dotenv'
 import morgan from "morgan"
-dotenv.config()
-const app: Express = express ()
+dotenv.config();
+
+async function init () {
+    const app: Express = express ()
 
 app.use(express.json())
 app.use(cors())
@@ -19,13 +24,19 @@ async function main() {
     console.log("Database Connected");
   }
 
+ 
 
+app.use("/graphql", expressMiddleware(await creategqlserver()));
 app.use('/api', apirouter);
 
 app.get('/', async (req: Request, res:Response)=>{
     res.json({message: "Server Running"})
 })
 
-app.listen (8080, ()=>{
+app.listen (8000, ()=>{
     console.log("server started")
 })
+
+}
+
+init ();
