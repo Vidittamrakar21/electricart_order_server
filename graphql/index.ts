@@ -4,6 +4,7 @@ import { Order } from './order';
 async function creategqlserver () {
     const gqlServer = new ApolloServer({
         typeDefs: `
+            ${Order.typeDefs}
             type Query {
                 ${User.queries}
                 ${Order.queries}
