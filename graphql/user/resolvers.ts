@@ -2,7 +2,11 @@ import usertype from "../../controller/user";
 //@ts-ignore
 import {newuser} from "../../controller/user"
 
-const queries = {}
+const queries = {
+    hello: ()=>{
+        return 'Hello'
+    }
+}
 
 const mutations = {
     createuser: async (_:any , payload:usertype)=>{

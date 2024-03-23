@@ -7,22 +7,22 @@ async function creategqlserver () {
             ${Order.typeDefs}
             type Query {
                 ${User.queries}
-                ${Order.queries}
+               
             }
 
             type Mutation {
                 ${User.mutations}
-                ${Order.mutations}
+               
             }
         `,
         resolvers: {
           Query: {
             ...User.resolvers.queries,
-            ...Order.resolvers.queries,
+          
           },
           Mutation: {
             ...User.resolvers.mutations,
-            ...Order.resolvers.mutations,
+           
           }
         },
       });
