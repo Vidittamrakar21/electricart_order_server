@@ -1,6 +1,6 @@
 import usertype from "../../controller/user";
 //@ts-ignore
-import {newuser} from "../../controller/user"
+import {newuser, validateuser} from "../../controller/user"
 
 const queries = {
     hello: ()=>{
@@ -12,6 +12,14 @@ const mutations = {
     createuser: async (_:any , payload:usertype)=>{
         const data = await newuser(payload);
         return data;
+    },
+
+    checkuser: async (_:any, payload: String)=> {
+        //@ts-ignore
+        const tok = payload.token
+     
+        const data = await validateuser(tok)
+        return data
     }
 }
 
