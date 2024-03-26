@@ -11,7 +11,7 @@ const queries = {
 const mutations = {
     createuser: async (_:any , payload:usertype)=>{
         const data = await newuser(payload);
-        return data._id;
+        return data;
     }
 }
 

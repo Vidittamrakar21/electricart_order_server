@@ -1,6 +1,9 @@
 //@ts-ignore
 import User from '../model/user'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config();
+
 export default interface usertype {
     name: string
     email: string
@@ -15,11 +18,18 @@ const newuser = async (payload: usertype)=> {
         const {name , email} = payload;
        const exists = await User.findOne({email: email});
        if(exists){
-        return exists;
+        //@ts-ignore
+        const token  = jwt.sign({name: name, email: email, id: exists._id}, process.env.SECKEY ,{expiresIn: "24h"})
+        return token;
        }
        else{
         const data = await User.create({name, email});
-        return data;
+        if(data){
+             //@ts-ignore
+        const token  = jwt.sign({name: name, email: email, id: exists._id}, process.env.SECKEY ,{expiresIn: "24h"})
+        return token;
+        }
+       
 
        }
         
