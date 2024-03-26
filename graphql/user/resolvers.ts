@@ -1,6 +1,6 @@
 import usertype from "../../controller/user";
 //@ts-ignore
-import {newuser, validateuser} from "../../controller/user"
+import {newuser, validateuser, accessuser} from "../../controller/user"
 
 const queries = {
     hello: ()=>{
@@ -20,7 +20,16 @@ const mutations = {
      
         const data = await validateuser(tok)
         return data
+    },
+
+    giveaccess: async (_: any, payload: String)=>{
+         //@ts-ignore
+         const tok = payload.token
+     
+         const data = await accessuser(tok)
+         return data;
     }
+
 }
 
 export const resolvers = {queries, mutations};

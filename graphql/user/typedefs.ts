@@ -8,5 +8,10 @@
         exp: Int
 
     }
+
+    type userinfo {
+        data: Token
+        accesstoken: String
+    }
   
  `

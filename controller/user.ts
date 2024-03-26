@@ -41,6 +41,16 @@ const newuser = async (payload: usertype)=> {
     }
 }
 
+type userinfo = {
+    data: {
+        name: string
+        email: string
+        id: string
+        iat: number
+        exp: number
+    }
+    accesstoken: string
+}
 
 const validateuser = async (token: string)=>{
 
@@ -50,6 +60,32 @@ const validateuser = async (token: string)=>{
            //@ts-ignore
             const check = jwt.verify(token, process.env.SECKEY)
             if(check){
+                //@ts-ignore
+                const token = jwt.sign({name: check.name, email: check.email, id: check.id}, process.env.SECKEY ,{expiresIn: "36h"})
+                const data:userinfo = {data: check, accesstoken: token}
+                return data;
+
+            }
+          
+        }
+        else{
+            console.log("error happend")
+        }
+        
+    } catch (error) {
+        return(error)
+    }
+}
+
+const accessuser = async (token: string)=> {
+    try {
+        
+        if(token){
+           //@ts-ignore
+            const check = jwt.verify(token, process.env.SECKEY)
+            if(check){
+                //@ts-ignore
+  
                 return check;
 
             }
@@ -64,4 +100,4 @@ const validateuser = async (token: string)=>{
     }
 }
 
-module.exports = {newuser, validateuser}
+module.exports = {newuser, validateuser, accessuser}
