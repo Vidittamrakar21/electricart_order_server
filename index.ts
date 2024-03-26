@@ -15,7 +15,7 @@ async function init () {
     const app: Express = express ()
 
 app.use(express.json())
-app.use(cors({origin: '*'}))
+app.use(cors())
 app.use(morgan('tiny'))
 
 main().catch(err => console.log(err));
