@@ -26,7 +26,7 @@ const newuser = async (payload: usertype)=> {
         const data = await User.create({name, email});
         if(data){
              //@ts-ignore
-        const token  = jwt.sign({name: name, email: email, id: exists._id}, process.env.SECKEY ,{expiresIn: "24h"})
+        const token  = jwt.sign({name: name, email: email, id: exists._id}, "shhh" ,{expiresIn: "24h"})
         return token;
         }
        
