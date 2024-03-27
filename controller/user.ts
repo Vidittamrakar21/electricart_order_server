@@ -100,4 +100,47 @@ const accessuser = async (token: string)=> {
     }
 }
 
-module.exports = {newuser, validateuser, accessuser}
+
+const updateview = async (uid: string, pid: string)=>{
+    try {
+        const user = await User.findById(uid);
+        if(user){
+            const posts:Array<string>  = user.recently;
+
+            if(posts.length > 5){
+                const data = await User.updateOne({_id: uid}, {recently: []});
+            }
+            const index = posts.indexOf(pid);
+            if(index === -1){
+
+                const data = await User.updateOne({_id: uid}, {$push: {recently: pid}});
+                if(data){
+                    
+                    return "updated"
+                }
+            }
+
+            else {
+                return "not updated"
+            }
+            
+        }
+    } catch (error) {
+        return error
+    }
+}
+
+const finduser = async (uid:string)=>{
+    try {
+
+         const user = await User.findById(uid);
+         if(user){
+            return user;
+         }
+
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = {newuser, validateuser, accessuser, updateview, finduser}

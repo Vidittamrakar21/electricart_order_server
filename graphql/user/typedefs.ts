@@ -14,4 +14,12 @@
         accesstoken: String
     }
   
+    type User {
+    name: String,
+    email: String,
+    cart: [String],
+    orders: [String],
+    recently: [String],
+    address: [String],
+    }
  `
