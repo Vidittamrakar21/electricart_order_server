@@ -143,4 +143,22 @@ const finduser = async (uid:string)=>{
     }
 }
 
-module.exports = {newuser, validateuser, accessuser, updateview, finduser}
+const add_address = async (uid:string, add: string) => {
+
+    try {
+
+    const data = await User.updateOne({_id: uid}, {$push: {address: add}});
+    if(data){
+                    
+        return "updated"
+    }
+    else {
+    return "not updated"
+    }
+        
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = {newuser, validateuser, accessuser, updateview, finduser, add_address}

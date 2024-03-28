@@ -1,6 +1,6 @@
 import usertype from "../../controller/user";
 //@ts-ignore
-import {newuser, validateuser, accessuser, updateview, finduser} from "../../controller/user"
+import {newuser, validateuser, accessuser, updateview, finduser, add_address} from "../../controller/user"
 
 const queries = {
     hello: ()=>{
@@ -47,6 +47,18 @@ const mutations = {
 
         const data = await finduser(uid);
         return data;
+    },
+
+    putadd: async (_: any, payload: Object)=> {
+
+         //@ts-ignore
+         const uid = payload.uid
+         //@ts-ignore
+         const add = payload.add
+ 
+         const data = await add_address(uid, add);
+         return data;
+
     }
 }
 

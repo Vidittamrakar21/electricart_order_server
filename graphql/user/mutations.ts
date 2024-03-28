@@ -8,4 +8,6 @@ export const mutations = `
     recentpost(uid: String, pid: String): String
 
     findoneuser(uid: String): User
+
+    putadd(uid: String, add: String): String
 `
