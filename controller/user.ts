@@ -161,4 +161,56 @@ const add_address = async (uid:string, add: string) => {
     }
 }
 
-module.exports = {newuser, validateuser, accessuser, updateview, finduser, add_address}
+const add_to_cart = async (uid:string, pid: string) => {
+
+    try {
+
+        const user = await User.findById(uid);
+
+       if(user){
+        const mycart:Array<string>  = user.cart;
+
+        const index = mycart.indexOf(pid);
+
+        if(index === -1){
+            const data = await User.updateOne({_id: uid}, {$push: {cart: pid}});
+            if(data){
+                    
+             return "updated"
+             }
+           else {
+              return "not updated"
+            }
+        }
+
+        else {
+            return "not updated"
+          }
+
+       }
+    
+        
+    } catch (error) {
+        return error
+    }
+}
+
+const rm_to_cart = async (uid:string, pid: string) => {
+
+    try {
+
+    const data = await User.updateOne({_id: uid}, {$pull: {cart: pid}});
+    if(data){
+                    
+        return "updated"
+    }
+    else {
+    return "not updated"
+    }
+        
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = {newuser, validateuser, accessuser, updateview, finduser, add_address, add_to_cart ,rm_to_cart}

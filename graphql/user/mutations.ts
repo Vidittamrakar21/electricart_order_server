@@ -10,4 +10,9 @@ export const mutations = `
     findoneuser(uid: String): User
 
     putadd(uid: String, add: String): String
+
+    addcart(uid: String, pid: String): String
+
+    rmcart(uid: String, pid: String): String
+
 `

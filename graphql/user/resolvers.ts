@@ -1,6 +1,6 @@
 import usertype from "../../controller/user";
 //@ts-ignore
-import {newuser, validateuser, accessuser, updateview, finduser, add_address} from "../../controller/user"
+import {newuser, validateuser, accessuser, updateview, finduser, add_address, add_to_cart, rm_to_cart} from "../../controller/user"
 
 const queries = {
     hello: ()=>{
@@ -59,7 +59,34 @@ const mutations = {
          const data = await add_address(uid, add);
          return data;
 
+    },
+
+
+    addcart: async (_:any, payload: Object)=>{
+         //@ts-ignore
+         const uid = payload.uid
+         //@ts-ignore
+         const pid = payload.pid
+
+         const data = await add_to_cart(uid, pid);
+         return data;
+
+
+    },
+
+    rmcart: async (_:any, payload: Object)=>{
+         //@ts-ignore
+         const uid = payload.uid
+         //@ts-ignore
+         const pid = payload.pid
+
+         const data = await rm_to_cart(uid, pid);
+         return data;
+
+
     }
+
+    
 }
 
 export const resolvers = {queries, mutations};
