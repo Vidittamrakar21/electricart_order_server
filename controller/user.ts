@@ -20,14 +20,14 @@ const newuser = async (payload: usertype)=> {
        const exists = await User.findOne({email: email});
        if(exists){
         //@ts-ignore
-        const token  = jwt.sign({name: name, email: email, id: exists._id}, process.env.SECKEY ,{expiresIn: "3h"})
+        const token  = jwt.sign({name: name, email: email, id: exists._id , cart: exists.cart}, process.env.SECKEY ,{expiresIn: "3h"})
         return token;
        }
        else{
         const data = await User.create({name, email});
         if(data){
              //@ts-ignore
-        const token  = jwt.sign({name: name, email: email, id: exists._id}, process.env.SECKEY ,{expiresIn: "3h"})
+        const token  = jwt.sign({name: name, email: email, id: data._id, cart: data.cart }, process.env.SECKEY ,{expiresIn: "3h"})
         return token;
         }
        
@@ -61,7 +61,7 @@ const validateuser = async (token: string)=>{
             const check = jwt.verify(token, process.env.SECKEY)
             if(check){
                 //@ts-ignore
-                const token = jwt.sign({name: check.name, email: check.email, id: check.id}, process.env.SECKEY ,{expiresIn: "36h"})
+                const token = jwt.sign({name: check.name, email: check.email, id: check.id , cart: check.cart}, process.env.SECKEY ,{expiresIn: "36h"})
                 const data:userinfo = {data: check, accesstoken: token}
                 return data;
 
