@@ -12,6 +12,7 @@ async function creategqlserver () {
 
             type Mutation {
                 ${User.mutations}
+                ${Order.mutations}
                
             }
         `,
@@ -22,6 +23,7 @@ async function creategqlserver () {
           },
           Mutation: {
             ...User.resolvers.mutations,
+            ...Order.resolvers.mutations
            
           }
         },

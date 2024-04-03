@@ -8,6 +8,7 @@ const queries = {}
 const mutations = {
     createorder: async (_:any, payload: Ordertype)=>{
         const data = await neworder(payload);
+        
         return data._id
     }
 }
