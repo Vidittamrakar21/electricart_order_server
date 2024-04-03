@@ -15,4 +15,8 @@ export const mutations = `
 
     rmcart(uid: String, pid: String): String
 
+    clearcart(uid: String): String
+
+
+
 `

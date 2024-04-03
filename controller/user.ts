@@ -195,6 +195,35 @@ const add_to_cart = async (uid:string, pid: string) => {
     }
 }
 
+
+const clear_to_cart = async (uid:string) => {
+
+    try {
+
+        const user = await User.findById(uid);
+
+       if(user){
+      
+
+            const data = await User.updateOne({_id: uid}, {cart: []});
+            if(data){
+                    
+             return "updated"
+             }
+           else {
+              return "not updated"
+            }
+        
+
+
+       }
+    
+        
+    } catch (error) {
+        return error
+    }
+}
+
 const rm_to_cart = async (uid:string, pid: string) => {
 
     try {
@@ -213,4 +242,4 @@ const rm_to_cart = async (uid:string, pid: string) => {
     }
 }
 
-module.exports = {newuser, validateuser, accessuser, updateview, finduser, add_address, add_to_cart ,rm_to_cart}
+module.exports = {newuser, validateuser, accessuser, updateview, finduser, add_address, add_to_cart ,rm_to_cart , clear_to_cart}
