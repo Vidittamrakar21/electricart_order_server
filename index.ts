@@ -70,7 +70,7 @@ const instance = new Razorpay({
   }
   
 
-  app.post('/api/payment/checkout',checkout);
+  // app.post('/api/payment/checkout',checkout);
 
   app.get('/', async (req: Request, res:Response)=>{
     res.json({message: "Server Running"})
