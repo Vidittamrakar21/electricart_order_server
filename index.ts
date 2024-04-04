@@ -8,6 +8,7 @@ import mongoose from 'mongoose'
 import cors from "cors";
 import dotenv from 'dotenv'
 import morgan from "morgan"
+import Razorpay from "razorpay"
 dotenv.config();
 import jwt from 'jsonwebtoken'
 
@@ -31,6 +32,47 @@ app.use("/graphql", expressMiddleware(await creategqlserver()));
 app.use('/api', apirouter);
 
 app.get('/', async (req: Request, res:Response)=>{
+    res.json({message: "Server Running"})
+    
+})
+
+
+const instance = new Razorpay({
+    //@ts-ignore
+    key_id: process.env.keyid,
+    key_secret: process.env.keysecret,
+  
+  });
+
+
+  const checkout = async (req:Request,res:Response) =>{
+
+    const {amt}  = req.body;
+    let amtt;
+
+    if(amt > 20000){
+      amtt = amt;
+    }
+
+    else{
+      amtt = amt*100
+    }
+
+    const options = {
+      amount: amtt,  // amount in the smallest currency unit
+      currency: "INR",
+     
+    };
+   const order = await instance.orders.create(options);
+   console.log(order)
+   const key = process.env.keyid
+   res.status(200).json({success: true, order , key})
+  }
+  
+
+  app.post('/api/payment/checkout',checkout);
+
+  app.get('/', async (req: Request, res:Response)=>{
     res.json({message: "Server Running"})
     
 })

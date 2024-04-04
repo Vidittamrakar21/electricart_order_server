@@ -16,19 +16,20 @@ function creategqlserver() {
     return __awaiter(this, void 0, void 0, function* () {
         const gqlServer = new server_1.ApolloServer({
             typeDefs: `
-            ${order_1.Order.typeDefs}
+            ${user_1.User.typeDefs}
             type Query {
                 ${user_1.User.queries}
-                ${order_1.Order.queries}
+               
             }
 
             type Mutation {
                 ${user_1.User.mutations}
                 ${order_1.Order.mutations}
+               
             }
         `,
             resolvers: {
-                Query: Object.assign(Object.assign({}, user_1.User.resolvers.queries), order_1.Order.resolvers.queries),
+                Query: Object.assign({}, user_1.User.resolvers.queries),
                 Mutation: Object.assign(Object.assign({}, user_1.User.resolvers.mutations), order_1.Order.resolvers.mutations)
             },
         });

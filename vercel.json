@@ -28,6 +28,11 @@
         },
 
           {
+             "src": "/api/payment/checkout",
+            "dest": "index.ts"
+        },
+
+          {
              "src": "/graphql",
             "dest": "index.ts"
         },
