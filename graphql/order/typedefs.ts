@@ -8,6 +8,7 @@
     paymentstatus: String,
     orderstatus: String,
     deliveryaddress: String,
+    image: String,
     }
     
  `

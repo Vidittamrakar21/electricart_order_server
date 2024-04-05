@@ -11,6 +11,7 @@ const OrderSchema = new Schema ({
     paymentstatus: String,
     orderstatus: String,
     deliveryaddress: String,
+    image: String,
     date: {type : Date, default: Date.now}
 
 

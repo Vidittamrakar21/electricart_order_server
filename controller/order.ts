@@ -10,15 +10,16 @@ export default interface Ordertype {
     paymentstatus: string,
     orderstatus: string,
     deliveryaddress: string,
+    image: string
 }
 
 
 const neworder = async (payload: Ordertype) => {
     try {
 
-        const {uid, pid, totalprice, totalitems, paymentmode , paymentstatus, orderstatus, deliveryaddress} = payload;
+        const {uid, pid, totalprice, totalitems, paymentmode , paymentstatus, orderstatus, deliveryaddress, image} = payload;
 
-        const data = await Order.create({uid,pid,totalprice,totalitems,paymentmode,paymentstatus,orderstatus, deliveryaddress});
+        const data = await Order.create({uid,pid,totalprice,totalitems,paymentmode,paymentstatus,orderstatus, deliveryaddress , image});
         return data
         
     } catch (error) {
