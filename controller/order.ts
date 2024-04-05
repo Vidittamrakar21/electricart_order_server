@@ -26,5 +26,18 @@ const neworder = async (payload: Ordertype) => {
     }
 }
 
+const findorder = async (uid: string) =>{
+    try {
 
-module.exports = {neworder}
+        const data  = await Order.find({uid: uid})
+
+        return data
+        
+    } catch (error) {
+        
+        return error
+    }
+}
+
+
+module.exports = {neworder, findorder}
