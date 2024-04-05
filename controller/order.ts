@@ -29,7 +29,7 @@ const neworder = async (payload: Ordertype) => {
 const findorder = async (uid: string) =>{
     try {
 
-        const data  = await Order.find({uid: uid})
+        const data  = await Order.find({uid: uid}).sort({date: -1})
 
         return data
         
