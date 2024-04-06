@@ -17,6 +17,7 @@ function creategqlserver() {
         const gqlServer = new server_1.ApolloServer({
             typeDefs: `
             ${user_1.User.typeDefs}
+            ${order_1.Order.typeDefs}
             type Query {
                 ${user_1.User.queries}
                

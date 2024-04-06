@@ -2,6 +2,7 @@
 import Order from '../model/order'
 
 export default interface Ordertype {
+    
     uid:  string,
     pid: [string],
     totalprice: number,

@@ -11,5 +11,7 @@ exports.typeDefs = `
     paymentstatus: String,
     orderstatus: String,
     deliveryaddress: String,
+    image: String,
     }
+    
  `;

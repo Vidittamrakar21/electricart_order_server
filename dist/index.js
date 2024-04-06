@@ -21,6 +21,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const morgan_1 = __importDefault(require("morgan"));
+const razorpay_1 = __importDefault(require("razorpay"));
 dotenv_1.default.config();
 function init() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -37,6 +38,33 @@ function init() {
         }
         app.use("/graphql", (0, express4_1.expressMiddleware)(yield (0, graphql_1.default)()));
         app.use('/api', test_1.default);
+        app.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            res.json({ message: "Server Running" });
+        }));
+        const instance = new razorpay_1.default({
+            //@ts-ignore
+            key_id: process.env.keyid,
+            key_secret: process.env.keysecret,
+        });
+        const checkout = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { amt } = req.body;
+            let amtt;
+            if (amt > 20000) {
+                amtt = amt;
+            }
+            else {
+                amtt = amt * 100;
+            }
+            const options = {
+                amount: amtt, // amount in the smallest currency unit
+                currency: "INR",
+            };
+            const order = yield instance.orders.create(options);
+            console.log(order);
+            const key = process.env.keyid;
+            res.status(200).json({ success: true, order, key });
+        });
+        app.post('/api/payment/checkout', checkout);
         app.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
             res.json({ message: "Server Running" });
         }));

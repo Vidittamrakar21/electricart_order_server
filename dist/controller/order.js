@@ -16,12 +16,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const order_1 = __importDefault(require("../model/order"));
 const neworder = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { uid, pid, totalprice, totalitems, paymentmode, paymentstatus, orderstatus, deliveryaddress } = payload;
-        const data = yield order_1.default.create({ uid, pid, totalprice, totalitems, paymentmode, paymentstatus, orderstatus, deliveryaddress });
+        const { uid, pid, totalprice, totalitems, paymentmode, paymentstatus, orderstatus, deliveryaddress, image } = payload;
+        const data = yield order_1.default.create({ uid, pid, totalprice, totalitems, paymentmode, paymentstatus, orderstatus, deliveryaddress, image });
         return data;
     }
     catch (error) {
         return (error);
     }
 });
-module.exports = { neworder };
+const findorder = (uid) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield order_1.default.find({ uid: uid }).sort({ date: -1 });
+        return data;
+    }
+    catch (error) {
+        return error;
+    }
+});
+module.exports = { neworder, findorder };

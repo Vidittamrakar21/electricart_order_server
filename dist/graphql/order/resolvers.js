@@ -17,6 +17,12 @@ const mutations = {
     createorder: (_, payload) => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield (0, order_1.neworder)(payload);
         return data._id;
+    }),
+    orderfind: (_, payload) => __awaiter(void 0, void 0, void 0, function* () {
+        //@ts-ignore
+        const uid = payload.uid;
+        const data = yield (0, order_1.findorder)(uid);
+        return data;
     })
 };
 exports.resolvers = { queries, mutations };

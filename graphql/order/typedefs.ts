@@ -1,5 +1,6 @@
  export const typeDefs = `
     type Order {
+    _id: String  
     uid: String,
     pid: [String] ,
     totalprice: Float,
