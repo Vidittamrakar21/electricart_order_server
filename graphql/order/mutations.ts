@@ -7,7 +7,8 @@ export const mutations = `
         paymentstatus: String,
         orderstatus: String,
         deliveryaddress: String,
-        image: String): String
+        image: String, deldate: Float): String,
+        
 
     orderfind(uid: String): [Order]    
 `

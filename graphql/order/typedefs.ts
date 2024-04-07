@@ -10,6 +10,7 @@
     orderstatus: String,
     deliveryaddress: String,
     image: String,
+    deldate: Float
     }
     
  `

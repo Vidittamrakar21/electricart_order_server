@@ -12,6 +12,7 @@ const OrderSchema = new Schema ({
     orderstatus: String,
     deliveryaddress: String,
     image: String,
+    deldate: Number,
     date: {type : Date, default: Date.now}
 
 
